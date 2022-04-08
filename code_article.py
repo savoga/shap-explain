@@ -5,12 +5,18 @@ import scipy.special
 import itertools
 
 
-df_data = pd.DataFrame(data={'A':[2,1,2,2],'B':[2,2,1,1],'C':[2,2,2,1]})
+# To compare the impact of *rule1* and *rule2* 
+# we can't just remove these rules since *rule3* is overlapping the impact of both rules. 
+# Indeed, observation 2 is filtered out by both *rule1* and *rule3*. Thus, removing *rule1* 
+# or *rule2* doesn't make any difference on the result.
+
+df_data = pd.DataFrame(data={'age':[42,39,45,51],'location':['EU','EU','US','US'],'income':[70,110,80,50]})
+df_data.index = ['client_1','client_2','client_3','client_4']
 
 dict_rules = {
-    'rule1':'x>1',
-    'rule2':'y>1',
-    'rule3':'z>1'
+    'rule1':'age>40',
+    'rule2':'location=="EU"',
+    'rule3':'income>60'
 }
 
 # Implementation from 
@@ -48,18 +54,22 @@ def kernel_shap(f, x, reference, M):
     y = f(V)
     tmp = np.linalg.inv(np.dot(np.dot(X.T, np.diag(weights)), X))
     theta = np.dot(tmp, np.dot(np.dot(X.T, np.diag(weights)), y)) 
+    
+    tmp = np.linalg.inv(np.dot(X.T, X))
+    theta = np.dot(tmp, np.dot(X.T, y))
+    
     return theta
 
 def scoring_simul(row, activated_rules):
     rules_res = []
     if activated_rules[0]==1:
-        x = row['A']
+        age = row['age']
         rules_res.append(eval(dict_rules['rule1']))
     if activated_rules[1]==1:
-        y = row['B']
+        location = row['location']
         rules_res.append(eval(dict_rules['rule2']))
     if activated_rules[2]==1:
-        z = row['C']
+        income = row['income']
         rules_res.append(eval(dict_rules['rule3']))
     if False not in rules_res:
         return 1

@@ -5,21 +5,21 @@ import scipy.special
 import itertools
 
 
-# To compare the impact of *rule1* and *rule2* 
-# we can't just remove these rules since *rule3* is overlapping the impact of both rules. 
-# Indeed, observation 2 is filtered out by both *rule1* and *rule3*. Thus, removing *rule1* 
+# To compare the impact of *rule1* and *rule2*
+# we can't just remove these rules since *rule3* is overlapping the impact of both rules.
+# Indeed, observation 2 is filtered out by both *rule1* and *rule3*. Thus, removing *rule1*
 # or *rule2* doesn't make any difference on the result.
 
-df_data = pd.DataFrame(data={'age':[42,39,45,51],'location':['EU','EU','US','US'],'income':[70,110,80,50]})
-df_data.index = ['client_1','client_2','client_3','client_4']
+df_data = pd.DataFrame(data={'age':[42,39,45,51],'location':['EU','EU','US','US'],'income':[110,140,120,80]})
+df_data.index = ['client1','client2','client3','client4']
 
 dict_rules = {
     'rule1':'age>40',
     'rule2':'location=="EU"',
-    'rule3':'income>60'
+    'rule3':'income>100'
 }
 
-# Implementation from 
+# Implementation from
 # https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/model_agnostic/Simple%20Kernel%20SHAP.html
 
 def powerset(iterable):
@@ -53,23 +53,20 @@ def kernel_shap(f, x, reference, M):
         print()
     y = f(V)
     tmp = np.linalg.inv(np.dot(np.dot(X.T, np.diag(weights)), X))
-    theta = np.dot(tmp, np.dot(np.dot(X.T, np.diag(weights)), y)) 
-    
-    tmp = np.linalg.inv(np.dot(X.T, X))
-    theta = np.dot(tmp, np.dot(X.T, y))
-    
+    theta = np.dot(tmp, np.dot(np.dot(X.T, np.diag(weights)), y))
+
     return theta
 
-def scoring_simul(row, activated_rules):
+def prediction(client_row, activated_rules):
     rules_res = []
     if activated_rules[0]==1:
-        age = row['age']
+        age = client_row['age']
         rules_res.append(eval(dict_rules['rule1']))
     if activated_rules[1]==1:
-        location = row['location']
+        location = client_row['location']
         rules_res.append(eval(dict_rules['rule2']))
     if activated_rules[2]==1:
-        income = row['income']
+        income = client_row['income']
         rules_res.append(eval(dict_rules['rule3']))
     if False not in rules_res:
         return 1
@@ -77,7 +74,7 @@ def scoring_simul(row, activated_rules):
 
 def predict_proba(activated_rules):
 #     activated_rules = activated_rules.tolist()[0]
-    label = df_data.apply(lambda x: scoring_simul(x, activated_rules), axis=1).values
+    label = df_data.apply(lambda x: prediction(x, activated_rules), axis=1).values
     return np.sum(label)/len(label)
 
 def proba_combinations(activated_rules_arr):

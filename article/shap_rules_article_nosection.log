@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.14)  9 APR 2022 13:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.10.14)  9 APR 2022 14:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -924,30 +924,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
 
-
+[5 <./../img/rule-shapley.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 152--153
 
  []
 
-[5 <./../img/rule-shapley.png>]
+
 Underfull \hbox (badness 10000) in paragraph at lines 154--155
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
  []
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
-<./../img/shapley-results.png, id=60, 542.025pt x 273.02pt>
+Underfull \hbox (badness 10000) in paragraph at lines 188--189
+
+ []
+
+<./../img/shapley-results.png, id=62, 542.025pt x 273.02pt>
 File: ./../img/shapley-results.png Graphic file (type png)
 <use ./../img/shapley-results.png>
 Package pdftex.def Info: ./../img/shapley-results.png  used on input line 193.
 (pdftex.def)             Requested size: 325.2175pt x 163.81326pt.
- [6])
+[6])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 112.
  [7 <./../img/shapley-results.png>]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 112.
@@ -957,18 +956,6 @@ Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 112.
 Package rerunfilecheck Info: File `shap_rules_article_nosection.out' has not ch
 anged.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                shap_rules_article_nosection
-(biblatex)                and rerun LaTeX afterwards.
-
 Package logreq Info: Writing requests to 'shap_rules_article_nosection.run.xml'
 .
 \openout1 = `shap_rules_article_nosection.run.xml'.
@@ -978,7 +965,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 112.
 Here is how much of TeX's memory you used:
  18548 strings out of 483107
  309677 string characters out of 5964629
- 1062928 words of memory out of 5000000
+ 1063016 words of memory out of 5000000
  33266 multiletter control sequences out of 15000+600000
  545853 words of font info for 59 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
@@ -999,10 +986,10 @@ ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/symbols/msbm10.pfb>
-Output written on shap_rules_article_nosection.pdf (7 pages, 700072 bytes).
+Output written on shap_rules_article_nosection.pdf (7 pages, 699754 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
+ 367 PDF objects out of 1000 (max. 8388607)
+ 122 compressed objects within 2 object streams
  32 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

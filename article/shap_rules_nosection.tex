@@ -147,13 +147,11 @@ The weights are thus defined as such:
 
 $$\omega_{z_i} = \frac{R-1}{C_{|z_i|}^R |z_i|(R-|z_i|)}$$
 
-with $|.|$ being the number of non-zero elements in $z_i$. \\
+with $|.|$ being the number of non-zero elements in $z_i$. The proof of this formula can be found in the \href{https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html}{supplementary material} of the article. \\
 
-Note that in our simple example with 3 rules only, the weights are all the same ($1/3$). \\
+Note that in our simple example with 3 rules only, the weights are all the same. \\
 
-The implementation of the Shapley values can be found on the \href{https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/model_agnostic/Simple%20Kernel%20SHAP.html}{Shap's documentation} and won't be detailed here. \\
-
-We need to create our own "prediction" function. For a specific combination of rules, this function returns $0$ if the client is filtered out, 1 otherwise. In other words, the probability of not being filtered out is 1. \\
+The implementation of the Shapley values can be found on the \href{https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/model_agnostic/Simple%20Kernel%20SHAP.html}{Shap's documentation} and won't be detailed here. The critical part in our use case is to properly define the "prediction" function. For a specific combination of rules, this function returns $0$ if the client is filtered out, 1 otherwise. In other words, if all rules are true, the probability for a client to be selected is 1. \\
 
 We first store the rules we want to assess in a dictionary. The Python function \textit{eval} will be very convenient to test whether a condition is satisfied.
 
@@ -167,7 +165,7 @@ We first store the rules we want to assess in a dictionary. The Python function 
 dict_rules = {
     'rule1':'age>40',
     'rule2':'location=="EU"',
-    'rule3':'income>60'
+    'rule3':'income>100'
 }
 
 def prediction(client_row, activated_rules):
@@ -187,9 +185,9 @@ def prediction(client_row, activated_rules):
 
 \end{lstlisting}
 
-The code of the example can be found on my \href{}{repo}. \\
+The code of the example can be found on my \href{https://github.com/savoga/shap-explain}{dedicated repo}. \\
 
-The Shapley value computation shows that rule 2 is the most important one. Then comes rule 1 and finally rule 3. We note that all rules contribute negatively to our results. This is expected since adding a rule necessarily filter out more clients. Based on these results, the management can decides for example to remove rule 3 since it's not contributing much to the client selection.
+The Shapley value computation shows that rule 2 is the most important one. Then comes rule 1 and finally rule 3. We note that all rules contribute negatively to our results. This is expected since adding a rule necessarily filter out more clients. Based on these results, the management can decide for example to remove rule 3 since it's not contributing much to the client selection. Alternatively, it can also decide to remove rule 2 that may be too selective.
 
 \begin{center}
 \includegraphics[scale=0.6]{./../img/shapley-results.png}

@@ -193,6 +193,8 @@ The Shapley value computation shows that rule 2 is the most important one. Then 
 \includegraphics[scale=0.6]{./../img/shapley-results.png}
 \end{center}
 
+Note: when using the weights as defined above, the estimation step is done through \href{https://en.wikipedia.org/wiki/Weighted_least_squares}{weighted least squares} (WLS - and not OLS anymore). The interesting thing when using such weights is that we can use them to approximate the results when we have too many combinations to go through. As you can imagine, one of the drawbacks of the method is that the number of combinations grows \textbf{exponentially}. Fortunately, the weights become very useful to select only the most important combinations. For more details, you can see this \href{https://github.com/savoga/shap-explain/blob/main/code/shap-rules-approximations.py}{dedicated script}. \\
+
 In this article I have presented a method to assess the importance of rules that compose any model. I first introduced an intuitive method that is unfortunately incomplete. Then I showed a method based on game theory that considers all possible cases to correctly assess the model. I finally gave some references to go deeper in the understanding of the theory. I hope some materials can be reused for your use case. Have fun!
 
 
